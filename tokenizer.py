@@ -25,4 +25,4 @@ files = ["data/庆余年.txt"]
 tokenizer.train(files, trainer)
 
 newtokenizer = GPT2TokenizerFast(tokenizer_object=tokenizer)
-newtokenizer.save_pretrained("./tokenization")
+newtokenizer.save_pretrained("./models")

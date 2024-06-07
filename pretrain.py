@@ -1,6 +1,6 @@
 from transformers import GPT2Config, GPT2LMHeadModel, GPT2Tokenizer
 
-tokenizer = GPT2Tokenizer.from_pretrained("./tokenization")
+tokenizer = GPT2Tokenizer.from_pretrained("./models")
 tokenizer.add_special_tokens(
     {
         "eos_token": "</s>",
@@ -25,8 +25,6 @@ dataset = LineByLineTextDataset(
     tokenizer=tokenizer,
     file_path="./data/庆余年.txt",
     block_size=32,
-    # 如果训练时你的显存不够
-    # 可以适当调小 block_size
 )
 from transformers import DataCollatorForLanguageModeling
 
@@ -52,6 +50,5 @@ trainer = Trainer(
     data_collator=data_collator,
     train_dataset=dataset,
 )
-trainer.train()
-# 保存模型
-model.save_pretrained("./pretrained")
+trainer.train()  # 保存模型
+model.save_pretrained("./models")
