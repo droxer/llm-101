@@ -23,7 +23,7 @@ from transformers import LineByLineTextDataset
 
 dataset = LineByLineTextDataset(
     tokenizer=tokenizer,
-    file_path="./data/sanguoyanyi.txt",
+    file_path="./data/庆余年.txt",
     block_size=32,
     # 如果训练时你的显存不够
     # 可以适当调小 block_size

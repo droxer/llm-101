@@ -6,7 +6,7 @@ from tokenizers.pre_tokenizers import ByteLevel
 from tokenizers.decoders import ByteLevel as ByteLevelDecoder
 from transformers import GPT2TokenizerFast
 
-# 构建分词器 GPT2 基于 BPE 算法实现
+
 tokenizer = Tokenizer(BPE(unk_token="<unk>"))
 tokenizer.normalizer = Sequence([NFKC()])
 tokenizer.pre_tokenizer = ByteLevel()
@@ -19,10 +19,10 @@ trainer = BpeTrainer(
     inital_alphabet=ByteLevel.alphabet(),
     special_tokens=special_tokens,
 )
-# 创建 text 文件夹，并把 sanguoyanyi.txt 下载，放到目录里
-files = ["data/sanguoyanyi.txt"]
-# 开始训练了
+
+files = ["data/庆余年.txt"]
+
 tokenizer.train(files, trainer)
-# 把训练的分词通过GPT2保存起来，以方便后续使用
+
 newtokenizer = GPT2TokenizerFast(tokenizer_object=tokenizer)
 newtokenizer.save_pretrained("./tokenization")
