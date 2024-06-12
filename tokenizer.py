@@ -20,7 +20,7 @@ trainer = BpeTrainer(
     special_tokens=special_tokens,
 )
 
-files = ["data/庆余年.txt"]
+files = ["data/shakespeare.txt"]
 
 tokenizer.train(files, trainer)
 

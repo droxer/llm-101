@@ -23,7 +23,7 @@ from transformers import LineByLineTextDataset
 
 dataset = LineByLineTextDataset(
     tokenizer=tokenizer,
-    file_path="./data/庆余年.txt",
+    file_path="./data/shakespeare.txt",
     block_size=32,
 )
 from transformers import DataCollatorForLanguageModeling
@@ -50,5 +50,5 @@ trainer = Trainer(
     data_collator=data_collator,
     train_dataset=dataset,
 )
-trainer.train()  # 保存模型
+trainer.train()
 model.save_pretrained("./models")

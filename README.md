@@ -18,7 +18,7 @@ python3 tokenizer.py
 
 4. 预训练
 ```shell
-python3 pretrain.py
+python3 trainer.py
 ```
 
 
