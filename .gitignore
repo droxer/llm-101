@@ -1,5 +1,6 @@
 models
 output
-venv
+.envrc
+.venv
 __pycache__
 .DS_Store
