@@ -1,6 +1,10 @@
 from transformers import GPT2Config, GPT2LMHeadModel, GPT2Tokenizer
 
-tokenizer = GPT2Tokenizer.from_pretrained("./models")
+dataset_path = "./data/shakespeare.txt"
+model_dir = "./models"
+output_dir = "./outputs"
+
+tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
 tokenizer.add_special_tokens(
     {
         "eos_token": "</s>",
@@ -23,7 +27,7 @@ from transformers import LineByLineTextDataset
 
 dataset = LineByLineTextDataset(
     tokenizer=tokenizer,
-    file_path="./data/shakespeare.txt",
+    file_path=dataset_path,
     block_size=32,
 )
 from transformers import DataCollatorForLanguageModeling
@@ -36,14 +40,14 @@ from transformers import Trainer, TrainingArguments
 
 
 training_args = TrainingArguments(
-    output_dir="./output",
+    output_dir=output_dir,
     overwrite_output_dir=True,
     num_train_epochs=20,
     per_device_train_batch_size=16,
     save_steps=2000,
-    save_total_limit=2,
-    use_mps_device=True,
+    save_total_limit=2
 )
+
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -51,4 +55,4 @@ trainer = Trainer(
     train_dataset=dataset,
 )
 trainer.train()
-model.save_pretrained("./models")
+model.save_pretrained(model_dir)

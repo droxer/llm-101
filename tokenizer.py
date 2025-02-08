@@ -6,6 +6,8 @@ from tokenizers.pre_tokenizers import ByteLevel
 from tokenizers.decoders import ByteLevel as ByteLevelDecoder
 from transformers import GPT2TokenizerFast
 
+dataset_path = "./data/shakespeare.txt"
+model_dir = "./models"
 
 tokenizer = Tokenizer(BPE(unk_token="<unk>"))
 tokenizer.normalizer = Sequence([NFKC()])
@@ -20,9 +22,7 @@ trainer = BpeTrainer(
     special_tokens=special_tokens,
 )
 
-files = ["data/shakespeare.txt"]
-
-tokenizer.train(files, trainer)
+tokenizer.train([dataset_path], trainer)
 
 newtokenizer = GPT2TokenizerFast(tokenizer_object=tokenizer)
-newtokenizer.save_pretrained("./models")
+newtokenizer.save_pretrained(model_dir)
